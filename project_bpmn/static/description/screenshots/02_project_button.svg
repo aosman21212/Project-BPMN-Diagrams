@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
+  <defs>
+    <filter id="sh" x="-5%" y="-5%" width="115%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000018"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="600" fill="#f0f2f5"/>
+  <!-- Nav -->
+  <rect width="1200" height="48" fill="#875a7b"/>
+  <text x="20" y="30" fill="white" font-size="16" font-family="sans-serif" font-weight="bold">⬡ Odoo</text>
+  <text x="90" y="30" fill="#ddd" font-size="13" font-family="sans-serif">Project  ›  E-Commerce Revamp</text>
+
+  <!-- Card -->
+  <rect x="16" y="60" width="1168" height="520" rx="6" fill="white" filter="url(#sh)"/>
+
+  <!-- ─ Smart buttons row ─ -->
+  <rect x="16" y="60" width="1168" height="60" rx="6" fill="#f8f9fa"/>
+  <rect x="16" y="112" width="1168" height="1" fill="#dee2e6"/>
+
+  <!-- Tasks button -->
+  <rect x="36" y="70" width="100" height="42" rx="6" fill="white" stroke="#dee2e6"/>
+  <text x="86" y="88" text-anchor="middle" font-size="18" font-family="sans-serif" fill="#875a7b">24</text>
+  <text x="86" y="103" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">Tasks</text>
+
+  <!-- Members button -->
+  <rect x="146" y="70" width="100" height="42" rx="6" fill="white" stroke="#dee2e6"/>
+  <text x="196" y="88" text-anchor="middle" font-size="18" font-family="sans-serif" fill="#875a7b">5</text>
+  <text x="196" y="103" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">Members</text>
+
+  <!-- Hours button -->
+  <rect x="256" y="70" width="100" height="42" rx="6" fill="white" stroke="#dee2e6"/>
+  <text x="306" y="88" text-anchor="middle" font-size="18" font-family="sans-serif" fill="#875a7b">142</text>
+  <text x="306" y="103" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">Hours</text>
+
+  <!-- ★ BPMN Diagrams button (highlighted) -->
+  <rect x="366" y="66" width="120" height="50" rx="6" fill="#e7ecfd" stroke="#4361ee" stroke-width="2" filter="url(#sh)"/>
+  <text x="426" y="85" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">🗺</text>
+  <text x="426" y="101" text-anchor="middle" font-size="20" font-family="sans-serif" font-weight="700" fill="#4361ee">3</text>
+  <text x="426" y="113" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#4361ee" font-weight="600">Diagrams</text>
+  <!-- Callout arrow -->
+  <polygon points="426,120 416,134 436,134" fill="#4361ee"/>
+  <rect x="340" y="134" width="172" height="34" rx="4" fill="#4361ee"/>
+  <text x="426" y="156" text-anchor="middle" font-size="12" font-family="sans-serif" fill="white">Click to view BPMN Diagrams</text>
+
+  <!-- Project title -->
+  <text x="36" y="152" font-size="22" font-family="sans-serif" font-weight="600" fill="#212529">E-Commerce Revamp</text>
+
+  <!-- Project form fields -->
+  <text x="36" y="184" font-size="12" font-family="sans-serif" fill="#6c757d">Project Manager</text>
+  <text x="160" y="184" font-size="12" font-family="sans-serif" fill="#222">Alice Martin</text>
+  <text x="36" y="206" font-size="12" font-family="sans-serif" fill="#6c757d">Company</text>
+  <text x="160" y="206" font-size="12" font-family="sans-serif" fill="#222">Acme Corp</text>
+  <text x="36" y="228" font-size="12" font-family="sans-serif" fill="#6c757d">Start Date</text>
+  <text x="160" y="228" font-size="12" font-family="sans-serif" fill="#222">01/03/2026</text>
+  <text x="36" y="250" font-size="12" font-family="sans-serif" fill="#6c757d">Deadline</text>
+  <text x="160" y="250" font-size="12" font-family="sans-serif" fill="#222">30/06/2026</text>
+
+  <!-- Divider -->
+  <line x1="36" y1="266" x2="1160" y2="266" stroke="#e9ecef"/>
+
+  <!-- Diagrams list preview -->
+  <text x="36" y="294" font-size="15" font-family="sans-serif" font-weight="600" fill="#343a40">BPMN Diagrams (3)</text>
+
+  <!-- Diagram rows -->
+  <rect x="36" y="304" width="1128" height="48" rx="4" fill="#f8f9fa"/>
+  <text x="60" y="326" font-size="13" font-family="sans-serif" fill="#4361ee">🗺 Order Fulfilment Process</text>
+  <text x="60" y="344" font-size="11" font-family="sans-serif" fill="#6c757d">7 elements · 6 connections</text>
+  <text x="1100" y="333" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">Edit ›</text>
+
+  <rect x="36" y="358" width="1128" height="48" rx="4" fill="white"/>
+  <text x="60" y="380" font-size="13" font-family="sans-serif" fill="#4361ee">🗺 User Onboarding Flow</text>
+  <text x="60" y="398" font-size="11" font-family="sans-serif" fill="#6c757d">5 elements · 4 connections</text>
+  <text x="1100" y="387" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">Edit ›</text>
+
+  <rect x="36" y="412" width="1128" height="48" rx="4" fill="#f8f9fa"/>
+  <text x="60" y="434" font-size="13" font-family="sans-serif" fill="#4361ee">🗺 Payment Processing</text>
+  <text x="60" y="452" font-size="11" font-family="sans-serif" fill="#6c757d">9 elements · 8 connections</text>
+  <text x="1100" y="441" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">Edit ›</text>
+
+  <!-- New diagram button -->
+  <rect x="36" y="472" width="160" height="32" rx="4" fill="#4361ee"/>
+  <text x="116" y="493" text-anchor="middle" font-size="12" font-family="sans-serif" fill="white">+ New Diagram</text>
+
+  <!-- Caption bar -->
+  <rect x="0" y="575" width="1200" height="25" fill="#343a40"/>
+  <text x="600" y="591" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#adb5bd">
+    Screenshot 2 — BPMN Diagrams smart button on Project form
+  </text>
+</svg>

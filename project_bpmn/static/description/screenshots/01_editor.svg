@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000020"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#555"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#4361ee"/>
+    </marker>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0L0 0 0 20" fill="none" stroke="#e4e7ec" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Window chrome -->
+  <rect width="1200" height="700" fill="#f0f2f5"/>
+  <!-- Top nav bar -->
+  <rect width="1200" height="48" fill="#875a7b"/>
+  <text x="20" y="30" fill="white" font-size="16" font-family="sans-serif" font-weight="bold">⬡ Odoo</text>
+  <text x="90" y="30" fill="#ddd" font-size="13" font-family="sans-serif">Project  ›  BPMN Diagrams  ›  Order Fulfilment Process</text>
+
+  <!-- Form card -->
+  <rect x="16" y="60" width="1168" height="624" rx="6" fill="white" filter="url(#shadow)"/>
+
+  <!-- Form header -->
+  <rect x="16" y="60" width="1168" height="52" rx="6" fill="white"/>
+  <rect x="16" y="104" width="1168" height="1" fill="#e0e0e0"/>
+  <text x="36" y="93" font-size="22" font-family="sans-serif" font-weight="600" fill="#212529">Order Fulfilment Process</text>
+  <!-- Breadcrumb buttons -->
+  <rect x="980" y="70" width="80" height="30" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="1020" y="90" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#495057">Discard</text>
+  <rect x="1070" y="70" width="80" height="30" rx="4" fill="#875a7b"/>
+  <text x="1110" y="90" text-anchor="middle" font-size="12" font-family="sans-serif" fill="white">Save</text>
+
+  <!-- Meta row -->
+  <text x="36" y="130" font-size="12" font-family="sans-serif" fill="#6c757d">Project:</text>
+  <text x="90" y="130" font-size="12" font-family="sans-serif" fill="#4361ee">E-Commerce Revamp</text>
+  <text x="240" y="130" font-size="12" font-family="sans-serif" fill="#6c757d">Task:</text>
+  <text x="270" y="130" font-size="12" font-family="sans-serif" fill="#4361ee">Backend Integration</text>
+  <text x="430" y="130" font-size="12" font-family="sans-serif" fill="#6c757d">Elements: 7</text>
+
+  <!-- ── BPMN Editor Widget ── -->
+  <!-- Toolbar -->
+  <rect x="16" y="140" width="1168" height="38" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+
+  <!-- Tool buttons -->
+  <!-- Pointer (active) -->
+  <rect x="24" y="147" width="30" height="24" rx="4" fill="#4361ee"/>
+  <text x="39" y="163" text-anchor="middle" font-size="11" fill="white">↖</text>
+  <!-- Connect -->
+  <rect x="58" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="73" y="163" text-anchor="middle" font-size="11" fill="#555">→</text>
+
+  <!-- Separator -->
+  <line x1="96" y1="150" x2="96" y2="170" stroke="#dee2e6"/>
+
+  <!-- Start event button -->
+  <rect x="104" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <circle cx="119" cy="159" r="7" fill="#52b788" stroke="#2d6a4f" stroke-width="1.5"/>
+  <!-- Task button -->
+  <rect x="138" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <rect x="143" y="152" width="20" height="14" rx="2" fill="white" stroke="#4361ee" stroke-width="1.5"/>
+  <!-- XOR Gateway button -->
+  <rect x="172" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="187" y="163" text-anchor="middle" font-size="13" fill="#f9a825">◇</text>
+  <!-- AND Gateway button -->
+  <rect x="206" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="221" y="163" text-anchor="middle" font-size="11" fill="#1565c0">⊕</text>
+  <!-- End event button -->
+  <rect x="240" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <circle cx="255" cy="159" r="7" fill="#e63946" stroke="#9b1a23" stroke-width="3"/>
+  <!-- Annotation button -->
+  <rect x="274" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="289" y="163" text-anchor="middle" font-size="11" fill="#555">✎</text>
+
+  <!-- Separator -->
+  <line x1="312" y1="150" x2="312" y2="170" stroke="#dee2e6"/>
+
+  <!-- Delete button -->
+  <rect x="320" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="335" y="163" text-anchor="middle" font-size="11" fill="#dc3545">🗑</text>
+
+  <!-- Separator -->
+  <line x1="358" y1="150" x2="358" y2="170" stroke="#dee2e6"/>
+
+  <!-- Zoom buttons -->
+  <rect x="366" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="381" y="163" text-anchor="middle" font-size="13" fill="#555">⊕</text>
+  <rect x="400" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="415" y="163" text-anchor="middle" font-size="13" fill="#555">⊖</text>
+  <rect x="434" y="147" width="30" height="24" rx="4" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text x="449" y="163" text-anchor="middle" font-size="11" fill="#555">⤢</text>
+
+  <!-- Export buttons -->
+  <rect x="1010" y="147" width="72" height="24" rx="4" fill="#198754"/>
+  <text x="1046" y="163" text-anchor="middle" font-size="11" fill="white" font-family="sans-serif">↓ BPMN</text>
+  <rect x="1088" y="147" width="72" height="24" rx="4" fill="#198754"/>
+  <text x="1124" y="163" text-anchor="middle" font-size="11" fill="white" font-family="sans-serif">↓ SVG</text>
+
+  <!-- ── Canvas area ── -->
+  <rect x="16" y="178" width="968" height="470" fill="#f9fafb"/>
+  <rect x="16" y="178" width="968" height="470" fill="url(#grid)"/>
+
+  <!-- ════ BPMN Elements ════ -->
+
+  <!-- START EVENT -->
+  <circle cx="100" cy="380" r="22" fill="#52b788" stroke="#2d6a4f" stroke-width="2" filter="url(#shadow)"/>
+  <text x="100" y="416" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#333">Start</text>
+
+  <!-- seq flow: start → receive order -->
+  <line x1="122" y1="380" x2="188" y2="380" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- TASK: Receive Order -->
+  <rect x="190" y="348" width="130" height="64" rx="6" fill="white" stroke="#4361ee" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="255" y="375" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#222">Receive</text>
+  <text x="255" y="391" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#222">Order</text>
+
+  <!-- seq: receive → check stock -->
+  <line x1="320" y1="380" x2="388" y2="380" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- TASK: Check Stock (SELECTED - blue border) -->
+  <rect x="390" y="348" width="130" height="64" rx="6" fill="white" stroke="#4361ee" stroke-width="3" filter="url(#shadow)"/>
+  <!-- selection handles -->
+  <rect x="385" y="343" width="9" height="9" rx="1" fill="#4361ee" stroke="white" stroke-width="1"/>
+  <rect x="516" y="343" width="9" height="9" rx="1" fill="#4361ee" stroke="white" stroke-width="1"/>
+  <rect x="385" y="407" width="9" height="9" rx="1" fill="#4361ee" stroke="white" stroke-width="1"/>
+  <rect x="516" y="407" width="9" height="9" rx="1" fill="#4361ee" stroke="white" stroke-width="1"/>
+  <text x="455" y="375" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#222">Check</text>
+  <text x="455" y="391" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#222">Stock</text>
+
+  <!-- seq: check stock → gateway -->
+  <line x1="520" y1="380" x2="575" y2="380" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- XOR GATEWAY -->
+  <polygon points="600,352 628,380 600,408 572,380" fill="#fff9c4" stroke="#f9a825" stroke-width="2" filter="url(#shadow)"/>
+  <line x1="584" y1="364" x2="616" y2="396" stroke="#f9a825" stroke-width="2.5"/>
+  <line x1="616" y1="364" x2="584" y2="396" stroke="#f9a825" stroke-width="2.5"/>
+  <text x="600" y="424" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#333">In Stock?</text>
+
+  <!-- seq: gateway → ship (Yes) -->
+  <line x1="628" y1="380" x2="695" y2="380" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="661" y="373" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#555">Yes</text>
+
+  <!-- TASK: Ship Order -->
+  <rect x="697" y="348" width="130" height="64" rx="6" fill="white" stroke="#4361ee" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="762" y="375" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#222">Ship</text>
+  <text x="762" y="391" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#222">Order</text>
+
+  <!-- seq: ship → end -->
+  <line x1="827" y1="380" x2="888" y2="380" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- END EVENT -->
+  <circle cx="910" cy="380" r="20" fill="#e63946" stroke="#9b1a23" stroke-width="4" filter="url(#shadow)"/>
+  <text x="910" y="416" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#333">End</text>
+
+  <!-- seq: gateway → reorder (No) -->
+  <line x1="600" y1="408" x2="600" y2="490" stroke="#555" stroke-width="2"/>
+  <line x1="600" y1="490" x2="335" y2="490" stroke="#555" stroke-width="2"/>
+  <line x1="335" y1="490" x2="335" y2="413" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="560" y="480" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#555">No</text>
+
+  <!-- TASK: Reorder -->
+  <rect x="270" y="450" width="130" height="64" rx="6" fill="white" stroke="#4361ee" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="335" y="477" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#222">Reorder</text>
+  <text x="335" y="493" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#222">Stock</text>
+
+  <!-- Annotation -->
+  <rect x="670" y="250" width="155" height="55" rx="2" fill="#fffde7"/>
+  <path d="M 684,250 L 670,250 L 670,305 L 684,305" stroke="#f57f17" stroke-width="2" fill="none"/>
+  <text x="690" y="270" font-size="11" font-family="sans-serif" fill="#555">Express shipping</text>
+  <text x="690" y="287" font-size="11" font-family="sans-serif" fill="#555">for priority orders</text>
+  <!-- dashed line to ship task -->
+  <line x1="762" y1="305" x2="762" y2="348" stroke="#f57f17" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- ── Properties Panel ── -->
+  <rect x="984" y="178" width="200" height="470" fill="#fafafa" stroke="#dee2e6" stroke-width="1"/>
+  <text x="994" y="204" font-size="13" font-family="sans-serif" font-weight="600" fill="#343a40">⚙ Properties</text>
+  <line x1="984" y1="212" x2="1184" y2="212" stroke="#dee2e6"/>
+
+  <text x="994" y="234" font-size="10" font-family="sans-serif" font-weight="600" fill="#6c757d" letter-spacing="0.5">TYPE</text>
+  <rect x="994" y="240" width="60" height="18" rx="3" fill="#e7ecfd"/>
+  <text x="1024" y="253" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#3451d1">task</text>
+
+  <text x="994" y="278" font-size="10" font-family="sans-serif" font-weight="600" fill="#6c757d" letter-spacing="0.5">LABEL</text>
+  <rect x="994" y="284" width="176" height="26" rx="4" fill="white" stroke="#4361ee" stroke-width="1.5"/>
+  <text x="1004" y="302" font-size="12" font-family="sans-serif" fill="#222">Check Stock</text>
+
+  <text x="994" y="332" font-size="10" font-family="sans-serif" font-weight="600" fill="#6c757d" letter-spacing="0.5">POSITION</text>
+  <text x="994" y="348" font-size="12" font-family="sans-serif" fill="#6c757d">X: 390,  Y: 348</text>
+
+  <text x="994" y="368" font-size="10" font-family="sans-serif" font-weight="600" fill="#6c757d" letter-spacing="0.5">SIZE</text>
+  <text x="994" y="384" font-size="12" font-family="sans-serif" fill="#6c757d">130 × 64</text>
+
+  <rect x="994" y="590" width="176" height="32" rx="4" fill="#fff0f1" stroke="#f5c2c7"/>
+  <text x="1082" y="611" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#842029">🗑 Delete</text>
+
+  <!-- ── Status bar ── -->
+  <rect x="16" y="648" width="1168" height="28" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+  <text x="26" y="666" font-size="11" font-family="sans-serif" font-weight="600" fill="#495057">↖ Select/Move</text>
+  <text x="180" y="666" font-size="11" font-family="sans-serif" fill="#6c757d">⬡ 7 elements · 6 connections</text>
+  <text x="400" y="666" font-size="11" font-family="sans-serif" fill="#6c757d">🔍 100%</text>
+
+  <!-- Title label -->
+  <rect x="0" y="675" width="1200" height="25" fill="#343a40"/>
+  <text x="600" y="691" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#adb5bd">
+    Screenshot 1 — Interactive BPMN Canvas Editor with Properties Panel
+  </text>
+</svg>

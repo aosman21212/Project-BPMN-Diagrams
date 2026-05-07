@@ -1,0 +1,298 @@
+// ── BPMN Editor ──────────────────────────────────────────────────────────────
+
+.bpmn-editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 620px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: inherit;
+    outline: none;  // remove focus ring on the container
+}
+
+// ── Toolbar ────────────────────────────────────────────────────────────────
+
+.bpmn-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    border-bottom: 1px solid #dee2e6;
+    background: #f8f9fa;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.bpmn-tool-group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding-right: 10px;
+    border-right: 1px solid #dee2e6;
+    margin-right: 4px;
+
+    &:last-child,
+    &.bpmn-tool-group-right {
+        border-right: none;
+        margin-left: auto;
+    }
+}
+
+.bpmn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    color: #495057;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+
+    &:hover:not(:disabled) {
+        background: #e9ecef;
+        border-color: #ced4da;
+    }
+
+    &.active {
+        background: #4361ee;
+        color: #ffffff;
+        border-color: #3451d1;
+
+        &:hover { background: #3451d1; }
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    &.bpmn-btn-danger:not(:disabled):hover {
+        background: #f8d7da;
+        color: #842029;
+        border-color: #f5c2c7;
+    }
+
+    &.bpmn-btn-export {
+        background: #198754;
+        color: #ffffff;
+        border-color: #157347;
+        font-size: 12px;
+        font-weight: 500;
+
+        &:hover { background: #157347; }
+    }
+}
+
+// Palette icon shapes
+.bpmn-palette-btn {
+    width: 30px;
+    font-size: 10px;
+}
+
+.bpmn-pal-start {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #52b788;
+    border: 2px solid #2d6a4f;
+}
+
+.bpmn-pal-end {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #e63946;
+    border: 4px solid #9b1a23;
+}
+
+.bpmn-pal-task {
+    display: inline-block;
+    width: 18px;
+    height: 12px;
+    border: 2px solid #4361ee;
+    border-radius: 3px;
+    background: #fff;
+}
+
+.bpmn-pal-gw-x,
+.bpmn-pal-gw-p {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    background: #fff9c4;
+    border: 2px solid #f9a825;
+    font-size: 11px;
+    font-weight: 700;
+    color: #f9a825;
+    text-align: center;
+    line-height: 14px;
+    clip-path: none;        // fallback to text-only approach
+}
+
+.bpmn-pal-gw-p { color: #1565c0; }
+
+// ── Work area (canvas + properties panel) ─────────────────────────────────
+
+.bpmn-work-area {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    min-height: 0;
+}
+
+// ── Canvas ─────────────────────────────────────────────────────────────────
+
+.bpmn-canvas-wrap {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #f9fafb;
+}
+
+.bpmn-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: default;
+    user-select: none;
+}
+
+// ── SVG elements ─────────────────────────────────────────────────────────
+
+.bpmn-elem {
+    &.selected rect,
+    &.selected circle,
+    &.selected polygon,
+    &.selected path {
+        filter: drop-shadow(0 0 4px #4361ee88);
+    }
+}
+
+.bpmn-conn {
+    &.selected line:last-child {
+        stroke: #4361ee;
+    }
+}
+
+// ── Inline label editor overlay ────────────────────────────────────────────
+
+.bpmn-label-overlay {
+    position: absolute;
+    z-index: 200;
+}
+
+.bpmn-label-input {
+    width: 130px;
+    padding: 3px 7px;
+    border: 2px solid #4361ee;
+    border-radius: 4px;
+    font-size: 13px;
+    text-align: center;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 2px 8px #00000033;
+}
+
+// ── Properties panel ───────────────────────────────────────────────────────
+
+.bpmn-props-panel {
+    width: 210px;
+    flex-shrink: 0;
+    border-left: 1px solid #dee2e6;
+    background: #fafafa;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.bpmn-props-header {
+    font-weight: 600;
+    font-size: 13px;
+    color: #343a40;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.bpmn-props-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+}
+
+.bpmn-props-input {
+    width: 100%;
+    padding: 4px 7px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 13px;
+    background: #fff;
+    outline: none;
+
+    &:focus { border-color: #4361ee; box-shadow: 0 0 0 2px #4361ee22; }
+    &:read-only { background: #f8f9fa; color: #6c757d; }
+}
+
+.bpmn-type-badge {
+    background: #e7ecfd;
+    color: #3451d1;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-weight: 500;
+    width: fit-content;
+}
+
+.bpmn-delete-btn {
+    margin-top: auto;
+    padding: 6px 10px;
+    border: 1px solid #f5c2c7;
+    border-radius: 4px;
+    background: #fff0f1;
+    color: #842029;
+    font-size: 12px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: background 0.12s;
+
+    &:hover { background: #f8d7da; }
+}
+
+// ── Status bar ──────────────────────────────────────────────────────────────
+
+.bpmn-statusbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 4px 12px;
+    border-top: 1px solid #dee2e6;
+    background: #f8f9fa;
+    font-size: 11px;
+    color: #6c757d;
+    flex-shrink: 0;
+}
+
+.bpmn-status-tool   { font-weight: 600; color: #495057; }
+.bpmn-status-hint   { color: #4361ee; font-weight: 500; margin-left: auto; }
+.bpmn-status-zoom   { margin-left: auto; }

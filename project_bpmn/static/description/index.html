@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project BPMN Diagrams — Odoo 19</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8f9fa; color: #212529; }
+
+    /* Banner */
+    .banner { width: 100%; display: block; border-radius: 8px; }
+
+    /* Section */
+    .section { max-width: 960px; margin: 32px auto; padding: 0 16px; }
+    h2 { font-size: 22px; color: #2d3561; margin-bottom: 16px; border-left: 4px solid #4361ee; padding-left: 12px; }
+    p  { font-size: 14px; line-height: 1.7; color: #495057; margin-bottom: 12px; }
+
+    /* Feature grid */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .feat {
+      background: white; border-radius: 8px; padding: 20px;
+      border: 1px solid #dee2e6;
+      box-shadow: 0 2px 8px #00000010;
+    }
+    .feat .icon { font-size: 32px; margin-bottom: 10px; }
+    .feat h3   { font-size: 15px; color: #2d3561; margin-bottom: 6px; }
+    .feat p    { font-size: 13px; color: #6c757d; margin: 0; }
+
+    /* Screenshots */
+    .screenshots { display: flex; flex-direction: column; gap: 24px; }
+    .screenshot  { background: white; border-radius: 8px; overflow: hidden; border: 1px solid #dee2e6; box-shadow: 0 2px 12px #00000012; }
+    .screenshot img, .screenshot object { width: 100%; display: block; }
+    .screenshot .caption { padding: 12px 16px; background: #f8f9fa; border-top: 1px solid #dee2e6; font-size: 13px; color: #6c757d; }
+
+    /* BPMN elements legend */
+    .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+    .elem { display: flex; align-items: center; gap: 10px; background: white; border: 1px solid #dee2e6; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #495057; }
+
+    /* Install steps */
+    .steps { counter-reset: step; list-style: none; }
+    .steps li { counter-increment: step; display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+    .steps li::before {
+      content: counter(step);
+      min-width: 28px; height: 28px; border-radius: 50%;
+      background: #4361ee; color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .steps li span { padding-top: 4px; font-size: 14px; color: #495057; line-height: 1.6; }
+
+    /* Table */
+    table  { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 10px 14px; text-align: left; border: 1px solid #dee2e6; }
+    th     { background: #e7ecfd; color: #2d3561; font-weight: 600; }
+    tr:nth-child(even) td { background: #f8f9fa; }
+
+    /* Footer -->
+    .footer { text-align: center; padding: 32px; font-size: 13px; color: #adb5bd; }
+  </style>
+</head>
+<body>
+
+<!-- Banner -->
+<div class="section" style="margin-top:24px;">
+  <img class="banner" src="banner.svg" alt="Project BPMN Diagrams Banner"/>
+</div>
+
+<!-- Intro -->
+<div class="section">
+  <h2>📋 Overview</h2>
+  <p>
+    <strong>Project BPMN Diagrams</strong> brings a fully interactive, self-contained BPMN 2.0 process editor
+    directly into Odoo 19. Create, edit, and export process diagrams without leaving your project or task —
+    no external dependencies, no browser plugins required.
+  </p>
+  <p>
+    Attach unlimited diagrams to any <strong>project</strong> or <strong>task</strong>. Use the drag-and-drop
+    canvas to model business processes step by step using standard BPMN 2.0 notation. Export diagrams as
+    <strong>BPMN XML</strong> (importable in Camunda, Signavio, bpmn.io) or as <strong>SVG</strong> for
+    presentations and documentation.
+  </p>
+</div>
+
+<!-- Features -->
+<div class="section">
+  <h2>✨ Key Features</h2>
+  <div class="features">
+
+    <div class="feat">
+      <div class="icon">🎨</div>
+      <h3>Built-in BPMN Editor</h3>
+      <p>Interactive SVG canvas with drag-and-drop placement, element selection, and inline label editing. No external JS library needed.</p>
+    </div>
+
+    <div class="feat">
+      <div class="icon">🔷</div>
+      <h3>All Core BPMN 2.0 Elements</h3>
+      <p>Start/End Events, Tasks (rounded rectangles), Exclusive Gateways (XOR), Parallel Gateways (AND), Sequence Flows, and Text Annotations.</p>
+    </div>
+
+    <div class="feat">
+      <div class="icon">🔗</div>
+      <h3>Draw Connections Instantly</h3>
+      <p>Switch to Connect mode, click a source element, then click a target — a labelled sequence flow arrow is created automatically.</p>
+    </div>
+
+    <div class="feat">
+      <div class="icon">🔍</div>
+      <h3>Zoom &amp; Pan</h3>
+      <p>Mouse-wheel zoom, toolbar Zoom In/Out buttons, and a Fit to Screen control to keep your diagram in view at any scale.</p>
+    </div>
+
+    <div class="feat">
+      <div class="icon">📁</div>
+      <h3>Export BPMN 2.0 XML</h3>
+      <p>One-click download of a valid BPMN 2.0 XML file importable in Camunda Modeler, Signavio, bpmn.io, and other BPMN-compatible tools.</p>
+    </div>
+
+    <div class="feat">
+      <div class="icon">🖼</div>
+      <h3>Export SVG Vector Image</h3>
+      <p>Download the diagram as a crisp SVG file — perfect for inserting into Word, PowerPoint, Confluence, or any documentation system.</p>
+    </div>
+
+    <div class="feat">
+      <div class="icon">📌</div>
+      <h3>Smart Buttons on Project &amp; Task</h3>
+      <p>A counter smart button appears on every Project and Task form showing how many diagrams are attached. Click to open the list directly.</p>
+    </div>
+
+    <div class="feat">
+      <div class="icon">💬</div>
+      <h3>Chatter / Activity Tracking</h3>
+      <p>Every BPMN diagram inherits Odoo's mail.thread mixin — log notes, schedule activities, and track diagram changes over time.</p>
+    </div>
+
+    <div class="feat">
+      <div class="icon">⌨️</div>
+      <h3>Keyboard Shortcuts</h3>
+      <p>Delete / Backspace removes selected elements, Escape resets the active tool, Enter confirms inline label edits.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- BPMN Element Legend -->
+<div class="section">
+  <h2>🗺 Supported BPMN 2.0 Elements</h2>
+  <div class="legend">
+    <div class="elem"><svg width="28" height="28"><circle cx="14" cy="14" r="12" fill="#52b788" stroke="#2d6a4f" stroke-width="2"/></svg> Start Event</div>
+    <div class="elem"><svg width="28" height="28"><circle cx="14" cy="14" r="10" fill="#e63946" stroke="#9b1a23" stroke-width="4"/></svg> End Event</div>
+    <div class="elem"><svg width="40" height="28"><rect x="2" y="6" width="36" height="22" rx="4" fill="white" stroke="#4361ee" stroke-width="2"/></svg> Task</div>
+    <div class="elem"><svg width="36" height="28"><polygon points="18,2 34,14 18,26 2,14" fill="#fff9c4" stroke="#f9a825" stroke-width="2"/></svg> XOR Gateway</div>
+    <div class="elem"><svg width="36" height="28"><polygon points="18,2 34,14 18,26 2,14" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/></svg> AND Gateway</div>
+    <div class="elem"><svg width="40" height="28"><rect x="2" y="4" width="36" height="22" fill="#fffde7"/><path d="M10,4 L2,4 L2,26 L10,26" stroke="#f57f17" stroke-width="2" fill="none"/></svg> Annotation</div>
+    <div class="elem"><svg width="40" height="20"><line x1="0" y1="10" x2="34" y2="10" stroke="#555" stroke-width="2"/><polygon points="30,6 40,10 30,14" fill="#555"/></svg> Sequence Flow</div>
+  </div>
+</div>
+
+<!-- Screenshots -->
+<div class="section">
+  <h2>📸 Screenshots</h2>
+  <div class="screenshots">
+
+    <div class="screenshot">
+      <img src="screenshots/01_editor.svg" alt="BPMN Editor Canvas"/>
+      <div class="caption">
+        <strong>Interactive Editor Canvas</strong> — Drag elements from the toolbar, draw connections, edit labels inline, and manage properties in the right panel.
+      </div>
+    </div>
+
+    <div class="screenshot">
+      <img src="screenshots/02_project_button.svg" alt="Project Smart Button"/>
+      <div class="caption">
+        <strong>Smart Button on Projects</strong> — A BPMN Diagrams counter appears on every project form. Click it to see all diagrams linked to that project.
+      </div>
+    </div>
+
+    <div class="screenshot">
+      <img src="screenshots/03_task_button.svg" alt="Task Smart Button"/>
+      <div class="caption">
+        <strong>Smart Button on Tasks</strong> — Diagrams can also be attached directly to individual tasks. Perfect for documenting sub-process steps or decision trees.
+      </div>
+    </div>
+
+    <div class="screenshot">
+      <img src="screenshots/04_export.svg" alt="Export to BPMN XML and SVG"/>
+      <div class="caption">
+        <strong>One-Click Export</strong> — Export to standard BPMN 2.0 XML for use in Camunda, Signavio, or bpmn.io — or export to SVG for presentations and docs.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Module structure -->
+<div class="section">
+  <h2>🏗 Module Structure</h2>
+  <table>
+    <thead><tr><th>Component</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>project.bpmn.diagram</code></td><td>Core model — stores diagram name, JSON canvas data, links to project/task, mail thread</td></tr>
+      <tr><td><code>project.project (extend)</code></td><td>Adds <code>bpmn_diagram_ids</code> one2many and smart-button counter</td></tr>
+      <tr><td><code>project.task (extend)</code></td><td>Adds <code>bpmn_diagram_ids</code> one2many and smart-button counter</td></tr>
+      <tr><td>OWL Field Widget <code>bpmn_editor</code></td><td>Custom text-field widget — renders the full interactive SVG canvas inside any Odoo form</td></tr>
+      <tr><td>BPMN 2.0 XML Generator</td><td>Pure JavaScript, no external library — converts internal JSON to spec-compliant BPMN 2.0 XML</td></tr>
+      <tr><td>SVG Exporter</td><td>Serialises the live SVG DOM element to a downloadable vector file</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Technical info -->
+<div class="section">
+  <h2>⚙ Technical Information</h2>
+  <table>
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Odoo Version</td><td>19.0</td></tr>
+      <tr><td>Dependencies</td><td><code>project</code>, <code>mail</code></td></tr>
+      <tr><td>External Libraries</td><td>None — fully self-contained</td></tr>
+      <tr><td>License</td><td>LGPL-3</td></tr>
+      <tr><td>Frontend Framework</td><td>OWL 2 (Odoo standard)</td></tr>
+      <tr><td>Export Formats</td><td>BPMN 2.0 XML, SVG</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Installation -->
+<div class="section">
+  <h2>🚀 Installation</h2>
+  <ol class="steps">
+    <li><span>Download the <strong>project_bpmn.zip</strong> file from this page.</span></li>
+    <li><span>In Odoo, go to <strong>Settings → Apps → Upload Module</strong> and upload the ZIP file.</span></li>
+    <li><span>Search for <em>"Project BPMN Diagrams"</em> in the Apps list and click <strong>Install</strong>.</span></li>
+    <li><span>Open any <strong>Project</strong> or <strong>Task</strong> form — the 🗺 <em>Diagrams</em> smart button will appear.</span></li>
+    <li><span>Or navigate to <strong>Project → BPMN Diagrams</strong> from the main menu to create diagrams directly.</span></li>
+  </ol>
+</div>
+
+<div class="footer">
+  Project BPMN Diagrams &nbsp;·&nbsp; Odoo 19.0 &nbsp;·&nbsp; Free &nbsp;·&nbsp; LGPL-3
+</div>
+
+</body>
+</html>

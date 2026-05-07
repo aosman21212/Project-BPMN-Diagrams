@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Smart button on project.project form -->
+    <record id="view_project_project_bpmn_form" model="ir.ui.view">
+        <field name="name">project.project.bpmn.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button"
+                        type="object"
+                        name="action_view_bpmn_diagrams"
+                        icon="fa-sitemap">
+                    <field name="bpmn_diagram_count"
+                           widget="statinfo"
+                           string="Diagrams"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600">
+  <defs>
+    <filter id="sh" x="-5%" y="-5%" width="115%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#00000018"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="600" fill="#f0f2f5"/>
+  <rect width="1200" height="48" fill="#875a7b"/>
+  <text x="20" y="30" fill="white" font-size="16" font-family="sans-serif" font-weight="bold">⬡ Odoo</text>
+  <text x="90" y="30" fill="#ddd" font-size="13" font-family="sans-serif">Project  ›  E-Commerce Revamp  ›  Backend Integration</text>
+
+  <!-- Card -->
+  <rect x="16" y="60" width="820" height="520" rx="6" fill="white" filter="url(#sh)"/>
+
+  <!-- Smart buttons -->
+  <rect x="16" y="60" width="820" height="58" rx="6" fill="#f8f9fa"/>
+  <rect x="16" y="110" width="820" height="1" fill="#dee2e6"/>
+
+  <!-- Hours button -->
+  <rect x="36" y="68" width="100" height="42" rx="6" fill="white" stroke="#dee2e6"/>
+  <text x="86" y="86" text-anchor="middle" font-size="18" font-family="sans-serif" fill="#875a7b">18h</text>
+  <text x="86" y="101" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">Hours</text>
+
+  <!-- Subtasks button -->
+  <rect x="146" y="68" width="100" height="42" rx="6" fill="white" stroke="#dee2e6"/>
+  <text x="196" y="86" text-anchor="middle" font-size="18" font-family="sans-serif" fill="#875a7b">4</text>
+  <text x="196" y="101" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#6c757d">Subtasks</text>
+
+  <!-- ★ BPMN button on TASK -->
+  <rect x="256" y="64" width="120" height="50" rx="6" fill="#e7ecfd" stroke="#4361ee" stroke-width="2" filter="url(#sh)"/>
+  <text x="316" y="83" text-anchor="middle" font-size="11" fill="#6c757d">🗺</text>
+  <text x="316" y="99" text-anchor="middle" font-size="20" font-family="sans-serif" font-weight="700" fill="#4361ee">2</text>
+  <text x="316" y="111" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#4361ee" font-weight="600">Diagrams</text>
+  <!-- Callout -->
+  <polygon points="316,118 306,132 326,132" fill="#4361ee"/>
+  <rect x="230" y="132" width="172" height="34" rx="4" fill="#4361ee"/>
+  <text x="316" y="154" text-anchor="middle" font-size="12" font-family="sans-serif" fill="white">2 BPMN diagrams attached</text>
+
+  <!-- Task title -->
+  <text x="36" y="150" font-size="20" font-family="sans-serif" font-weight="600" fill="#212529">Backend Integration</text>
+
+  <!-- State bar -->
+  <rect x="36" y="160" width="90" height="24" rx="12" fill="#cfe2ff"/>
+  <text x="81" y="177" text-anchor="middle" font-size="11" font-family="sans-serif" fill="#084298">In Progress</text>
+
+  <!-- Task fields -->
+  <text x="36" y="210" font-size="12" font-family="sans-serif" fill="#6c757d">Assigned to</text>
+  <text x="140" y="210" font-size="12" font-family="sans-serif" fill="#222">Bob Chen</text>
+  <text x="36" y="232" font-size="12" font-family="sans-serif" fill="#6c757d">Deadline</text>
+  <text x="140" y="232" font-size="12" font-family="sans-serif" fill="#dc3545">15/05/2026 ⚠</text>
+  <text x="36" y="254" font-size="12" font-family="sans-serif" fill="#6c757d">Project</text>
+  <text x="140" y="254" font-size="12" font-family="sans-serif" fill="#4361ee">E-Commerce Revamp</text>
+
+  <line x1="36" y1="270" x2="800" y2="270" stroke="#e9ecef"/>
+
+  <!-- Description -->
+  <text x="36" y="294" font-size="13" font-family="sans-serif" font-weight="600" fill="#343a40">Description</text>
+  <text x="36" y="316" font-size="12" font-family="sans-serif" fill="#6c757d">Integrate the new REST API endpoints with the frontend checkout</text>
+  <text x="36" y="334" font-size="12" font-family="sans-serif" fill="#6c757d">flow. See attached BPMN diagrams for the process specification.</text>
+
+  <line x1="36" y1="350" x2="800" y2="350" stroke="#e9ecef"/>
+
+  <!-- Attached diagrams list -->
+  <text x="36" y="374" font-size="13" font-family="sans-serif" font-weight="600" fill="#343a40">BPMN Diagrams (2)</text>
+  <rect x="36" y="384" width="764" height="46" rx="4" fill="#f8f9fa"/>
+  <text x="58" y="403" font-size="13" font-family="sans-serif" fill="#4361ee">🗺 API Integration Flow</text>
+  <text x="58" y="420" font-size="11" font-family="sans-serif" fill="#6c757d">5 elements · 4 connections — double-click to edit</text>
+
+  <rect x="36" y="436" width="764" height="46" rx="4" fill="white"/>
+  <text x="58" y="455" font-size="13" font-family="sans-serif" fill="#4361ee">🗺 Error Handling Process</text>
+  <text x="58" y="472" font-size="11" font-family="sans-serif" fill="#6c757d">6 elements · 5 connections</text>
+
+  <!-- Chatter panel (right side) -->
+  <rect x="852" y="60" width="332" height="520" rx="6" fill="white" filter="url(#sh)"/>
+  <rect x="852" y="60" width="332" height="40" rx="6" fill="#f8f9fa"/>
+  <rect x="852" y="92" width="332" height="1" fill="#dee2e6"/>
+  <text x="1018" y="84" text-anchor="middle" font-size="13" font-family="sans-serif" font-weight="600" fill="#343a40">💬 Chatter</text>
+
+  <rect x="868" y="110" width="300" height="56" rx="4" fill="#f8f9fa"/>
+  <text x="880" y="132" font-size="12" font-family="sans-serif" font-weight="600" fill="#222">Bob Chen</text>
+  <text x="880" y="150" font-size="11" font-family="sans-serif" fill="#6c757d">Added BPMN diagram: API Integration Flow</text>
+  <text x="1050" y="150" text-anchor="end" font-size="10" fill="#adb5bd">2h ago</text>
+
+  <rect x="868" y="174" width="300" height="56" rx="4" fill="#f8f9fa"/>
+  <text x="880" y="196" font-size="12" font-family="sans-serif" font-weight="600" fill="#222">Alice Martin</text>
+  <text x="880" y="214" font-size="11" font-family="sans-serif" fill="#6c757d">Stage changed to: In Progress</text>
+  <text x="1050" y="214" text-anchor="end" font-size="10" fill="#adb5bd">1d ago</text>
+
+  <!-- Caption -->
+  <rect x="0" y="575" width="1200" height="25" fill="#343a40"/>
+  <text x="600" y="591" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#adb5bd">
+    Screenshot 3 — BPMN Diagrams smart button on Task form
+  </text>
+</svg>

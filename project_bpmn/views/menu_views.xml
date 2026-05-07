@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add "BPMN Diagrams" entry under Project app menu -->
+    <menuitem id="menu_project_bpmn"
+              name="BPMN Diagrams"
+              parent="project.menu_main_pm"
+              action="action_project_bpmn_diagram"
+              sequence="90"/>
+</odoo>

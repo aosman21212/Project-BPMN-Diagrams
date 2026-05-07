@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_bpmn_diagram_user,project.bpmn.diagram user,model_project_bpmn_diagram,project.group_project_user,1,1,1,1
+access_project_bpmn_diagram_portal,project.bpmn.diagram portal,model_project_bpmn_diagram,base.group_portal,1,0,0,0

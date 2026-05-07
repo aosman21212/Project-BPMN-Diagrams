@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="project_bpmn.BpmnEditorField">
+    <div class="bpmn-editor-container"
+         tabindex="0"
+         t-on-keydown="onKeyDown">
+
+        <!-- ── Toolbar ──────────────────────────────────────────────── -->
+        <div class="bpmn-toolbar">
+
+            <!-- Pointer / Connect -->
+            <div class="bpmn-tool-group">
+                <button t-att-class="'bpmn-btn' + (state.tool === 'pointer' ? ' active' : '')"
+                        t-on-click="() => this.setTool('pointer')" title="Select / Move (Esc)">
+                    <i class="fa fa-mouse-pointer"/>
+                </button>
+                <button t-att-class="'bpmn-btn' + (state.tool === 'connect' ? ' active' : '')"
+                        t-on-click="() => this.setTool('connect')" title="Draw Connection (click source then target)">
+                    <i class="fa fa-long-arrow-right"/>
+                </button>
+            </div>
+
+            <!-- Element palette -->
+            <div class="bpmn-tool-group">
+                <button t-att-class="'bpmn-btn bpmn-palette-btn' + (state.tool === 'add_startEvent' ? ' active' : '')"
+                        t-on-click="() => this.setTool('add_startEvent')"
+                        title="Add Start Event">
+                    <span class="bpmn-pal-start"/>
+                </button>
+                <button t-att-class="'bpmn-btn bpmn-palette-btn' + (state.tool === 'add_task' ? ' active' : '')"
+                        t-on-click="() => this.setTool('add_task')"
+                        title="Add Task (Rectangle)">
+                    <span class="bpmn-pal-task"/>
+                </button>
+                <button t-att-class="'bpmn-btn bpmn-palette-btn' + (state.tool === 'add_exclusiveGateway' ? ' active' : '')"
+                        t-on-click="() => this.setTool('add_exclusiveGateway')"
+                        title="Add Exclusive Gateway (XOR decision)">
+                    <span class="bpmn-pal-gw-x">✕</span>
+                </button>
+                <button t-att-class="'bpmn-btn bpmn-palette-btn' + (state.tool === 'add_parallelGateway' ? ' active' : '')"
+                        t-on-click="() => this.setTool('add_parallelGateway')"
+                        title="Add Parallel Gateway (AND split/join)">
+                    <span class="bpmn-pal-gw-p">+</span>
+                </button>
+                <button t-att-class="'bpmn-btn bpmn-palette-btn' + (state.tool === 'add_endEvent' ? ' active' : '')"
+                        t-on-click="() => this.setTool('add_endEvent')"
+                        title="Add End Event">
+                    <span class="bpmn-pal-end"/>
+                </button>
+                <button t-att-class="'bpmn-btn bpmn-palette-btn' + (state.tool === 'add_annotation' ? ' active' : '')"
+                        t-on-click="() => this.setTool('add_annotation')"
+                        title="Add Text Annotation">
+                    <i class="fa fa-comment-o"/>
+                </button>
+            </div>
+
+            <!-- Delete -->
+            <div class="bpmn-tool-group">
+                <button class="bpmn-btn bpmn-btn-danger"
+                        t-att-disabled="!state.selectedId || undefined"
+                        t-on-click="deleteSelected"
+                        title="Delete selected (Del)">
+                    <i class="fa fa-trash-o"/>
+                </button>
+            </div>
+
+            <!-- Zoom -->
+            <div class="bpmn-tool-group">
+                <button class="bpmn-btn" t-on-click="zoomIn"     title="Zoom In">
+                    <i class="fa fa-search-plus"/>
+                </button>
+                <button class="bpmn-btn" t-on-click="zoomOut"    title="Zoom Out">
+                    <i class="fa fa-search-minus"/>
+                </button>
+                <button class="bpmn-btn" t-on-click="fitToScreen" title="Fit to Screen">
+                    <i class="fa fa-expand"/>
+                </button>
+            </div>
+
+            <!-- Exports -->
+            <div class="bpmn-tool-group bpmn-tool-group-right">
+                <button class="bpmn-btn bpmn-btn-export" t-on-click="exportBpmn"
+                        title="Export as BPMN 2.0 XML — importable in Camunda, Signavio, bpmn.io">
+                    <i class="fa fa-download me-1"/>BPMN
+                </button>
+                <button class="bpmn-btn bpmn-btn-export" t-on-click="exportSvg"
+                        title="Export as SVG vector image">
+                    <i class="fa fa-image me-1"/>SVG
+                </button>
+            </div>
+        </div><!-- /toolbar -->
+
+        <!-- ── Canvas + Properties side-by-side ────────────────────── -->
+        <div class="bpmn-work-area">
+
+            <!-- Canvas -->
+            <div class="bpmn-canvas-wrap">
+                <svg class="bpmn-canvas"
+                     t-ref="bpmnSvg"
+                     t-on-mousedown="onSvgMouseDown"
+                     t-on-mousemove="onSvgMouseMove"
+                     t-on-mouseup="onSvgMouseUp">
+
+                    <defs>
+                        <!-- Drop shadow for tasks -->
+                        <filter id="bpmn-shadow" x="-5%" y="-5%" width="110%" height="110%">
+                            <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#00000022"/>
+                        </filter>
+                        <!-- Arrow markers -->
+                        <marker id="bpmn-arrow"     markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0,10 3.5,0 7" fill="#555"/>
+                        </marker>
+                        <marker id="bpmn-arrow-sel" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0,10 3.5,0 7" fill="#4361ee"/>
+                        </marker>
+                        <marker id="bpmn-arrow-pre" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0,10 3.5,0 7" fill="#4361ee" opacity="0.6"/>
+                        </marker>
+                        <!-- Grid tile -->
+                        <pattern id="bpmn-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M20 0L0 0 0 20" fill="none" stroke="#e4e7ec" stroke-width="0.5"/>
+                        </pattern>
+                    </defs>
+
+                    <!-- All content in one transform group -->
+                    <g t-att-transform="'translate(' + state.panX * state.zoom + ',' + state.panY * state.zoom + ') scale(' + state.zoom + ')'">
+
+                        <!-- Grid background -->
+                        <rect x="-5000" y="-5000" width="15000" height="15000" fill="url(#bpmn-grid)"/>
+
+                        <!-- ── Connections (below elements) ─────────── -->
+                        <t t-foreach="connectionsList" t-as="conn" t-key="conn.id">
+                            <g t-att-class="'bpmn-conn' + (conn.id === state.selectedId ? ' selected' : '')">
+                                <!-- Invisible wide hit zone -->
+                                <line t-att-x1="conn.x1" t-att-y1="conn.y1"
+                                      t-att-x2="conn.x2" t-att-y2="conn.y2"
+                                      stroke="transparent" stroke-width="10"
+                                      style="cursor:pointer"
+                                      t-on-click="(ev) => this.onConnClick(ev, conn.id)"
+                                      t-on-dblclick="(ev) => this.onConnDblClick(ev, conn.id)"/>
+                                <!-- Visible line -->
+                                <line t-att-x1="conn.x1" t-att-y1="conn.y1"
+                                      t-att-x2="conn.x2" t-att-y2="conn.y2"
+                                      t-att-stroke="conn.id === state.selectedId ? '#4361ee' : '#555'"
+                                      stroke-width="2" pointer-events="none"
+                                      t-att-marker-end="conn.id === state.selectedId ? 'url(#bpmn-arrow-sel)' : 'url(#bpmn-arrow)'"/>
+                                <!-- Label -->
+                                <t t-if="conn.label">
+                                    <text t-att-x="conn.midX" t-att-y="conn.midY - 7"
+                                          text-anchor="middle" font-size="11" fill="#444"
+                                          style="pointer-events:none; user-select:none;">
+                                        <t t-esc="conn.label"/>
+                                    </text>
+                                </t>
+                            </g>
+                        </t>
+
+                        <!-- ── Connection preview (while drawing) ───── -->
+                        <t t-if="state.connectFrom and connectingFromElem">
+                            <line t-att-x1="connectingFromElem.x + connectingFromElem.w / 2"
+                                  t-att-y1="connectingFromElem.y + connectingFromElem.h / 2"
+                                  t-att-x2="state.mouseX"
+                                  t-att-y2="state.mouseY"
+                                  stroke="#4361ee" stroke-width="2" stroke-dasharray="6 3"
+                                  marker-end="url(#bpmn-arrow-pre)"
+                                  pointer-events="none" opacity="0.7"/>
+                        </t>
+
+                        <!-- ── Elements ──────────────────────────────── -->
+                        <t t-foreach="elementsList" t-as="el" t-key="el.id">
+                            <g t-att-class="'bpmn-elem' + (el.id === state.selectedId ? ' selected' : '') + ' bpmn-type-' + el.type"
+                               t-att-transform="'translate(' + el.x + ',' + el.y + ')'"
+                               style="cursor:pointer"
+                               t-on-mousedown="(ev) => this.onElemMouseDown(ev, el.id)"
+                               t-on-dblclick="(ev) => this.onElemDblClick(ev, el.id)">
+
+                                <!-- START EVENT -->
+                                <t t-if="el.type === 'startEvent'">
+                                    <circle t-att-cx="el.w/2" t-att-cy="el.h/2" t-att-r="el.w/2 - 1"
+                                            fill="#52b788"
+                                            t-att-stroke="el.id === state.selectedId ? '#4361ee' : '#2d6a4f'"
+                                            t-att-stroke-width="el.id === state.selectedId ? '3' : '2'"/>
+                                    <text t-att-x="el.w/2" t-att-y="el.h + 15"
+                                          text-anchor="middle" font-size="11" fill="#333"
+                                          style="pointer-events:none; user-select:none;">
+                                        <t t-esc="el.label"/>
+                                    </text>
+                                </t>
+
+                                <!-- END EVENT -->
+                                <t t-if="el.type === 'endEvent'">
+                                    <circle t-att-cx="el.w/2" t-att-cy="el.h/2" t-att-r="el.w/2 - 2"
+                                            fill="#e63946"
+                                            t-att-stroke="el.id === state.selectedId ? '#4361ee' : '#9b1a23'"
+                                            t-att-stroke-width="el.id === state.selectedId ? '5' : '4'"/>
+                                    <text t-att-x="el.w/2" t-att-y="el.h + 15"
+                                          text-anchor="middle" font-size="11" fill="#333"
+                                          style="pointer-events:none; user-select:none;">
+                                        <t t-esc="el.label"/>
+                                    </text>
+                                </t>
+
+                                <!-- TASK (rounded rectangle) -->
+                                <t t-if="el.type === 'task'">
+                                    <rect x="0" y="0" t-att-width="el.w" t-att-height="el.h"
+                                          rx="6" ry="6" fill="#ffffff"
+                                          t-att-stroke="el.id === state.selectedId ? '#4361ee' : '#4361ee'"
+                                          t-att-stroke-width="el.id === state.selectedId ? '3' : '1.5'"
+                                          filter="url(#bpmn-shadow)"/>
+                                    <foreignObject x="4" y="4" t-att-width="el.w - 8" t-att-height="el.h - 8"
+                                                   style="pointer-events:none; user-select:none; overflow:hidden;">
+                                        <div xmlns="http://www.w3.org/1999/xhtml"
+                                             style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#222;text-align:center;word-break:break-word;line-height:1.3;">
+                                            <t t-esc="el.label"/>
+                                        </div>
+                                    </foreignObject>
+                                </t>
+
+                                <!-- EXCLUSIVE GATEWAY (diamond with X) -->
+                                <t t-if="el.type === 'exclusiveGateway'">
+                                    <polygon t-att-points="gatewayPoints(el)"
+                                             fill="#fff9c4"
+                                             t-att-stroke="el.id === state.selectedId ? '#4361ee' : '#f9a825'"
+                                             t-att-stroke-width="el.id === state.selectedId ? '3' : '2'"/>
+                                    <line t-att-x1="el.w*0.32" t-att-y1="el.h*0.32"
+                                          t-att-x2="el.w*0.68" t-att-y2="el.h*0.68"
+                                          stroke="#f9a825" stroke-width="2.5" pointer-events="none"/>
+                                    <line t-att-x1="el.w*0.68" t-att-y1="el.h*0.32"
+                                          t-att-x2="el.w*0.32" t-att-y2="el.h*0.68"
+                                          stroke="#f9a825" stroke-width="2.5" pointer-events="none"/>
+                                    <text t-att-x="el.w/2" t-att-y="el.h + 15"
+                                          text-anchor="middle" font-size="11" fill="#333"
+                                          style="pointer-events:none; user-select:none;">
+                                        <t t-esc="el.label"/>
+                                    </text>
+                                </t>
+
+                                <!-- PARALLEL GATEWAY (diamond with +) -->
+                                <t t-if="el.type === 'parallelGateway'">
+                                    <polygon t-att-points="gatewayPoints(el)"
+                                             fill="#e3f2fd"
+                                             t-att-stroke="el.id === state.selectedId ? '#4361ee' : '#1565c0'"
+                                             t-att-stroke-width="el.id === state.selectedId ? '3' : '2'"/>
+                                    <line t-att-x1="el.w/2" t-att-y1="el.h*0.18"
+                                          t-att-x2="el.w/2" t-att-y2="el.h*0.82"
+                                          stroke="#1565c0" stroke-width="3" pointer-events="none"/>
+                                    <line t-att-x1="el.w*0.18" t-att-y1="el.h/2"
+                                          t-att-x2="el.w*0.82" t-att-y2="el.h/2"
+                                          stroke="#1565c0" stroke-width="3" pointer-events="none"/>
+                                    <text t-att-x="el.w/2" t-att-y="el.h + 15"
+                                          text-anchor="middle" font-size="11" fill="#333"
+                                          style="pointer-events:none; user-select:none;">
+                                        <t t-esc="el.label"/>
+                                    </text>
+                                </t>
+
+                                <!-- ANNOTATION -->
+                                <t t-if="el.type === 'annotation'">
+                                    <rect x="0" y="0" t-att-width="el.w" t-att-height="el.h"
+                                          fill="#fffde7" stroke="none" rx="2"/>
+                                    <path t-att-d="'M 14,0 L 0,0 L 0,' + el.h + ' L 14,' + el.h"
+                                          t-att-stroke="el.id === state.selectedId ? '#4361ee' : '#f57f17'"
+                                          stroke-width="2" fill="none"/>
+                                    <foreignObject x="18" y="4" t-att-width="el.w - 22" t-att-height="el.h - 8"
+                                                   style="pointer-events:none; user-select:none; overflow:hidden;">
+                                        <div xmlns="http://www.w3.org/1999/xhtml"
+                                             style="width:100%;height:100%;display:flex;align-items:center;font-size:12px;color:#555;word-break:break-word;line-height:1.3;">
+                                            <t t-esc="el.label"/>
+                                        </div>
+                                    </foreignObject>
+                                </t>
+
+                                <!-- Selection handles (corner squares) -->
+                                <t t-if="el.id === state.selectedId">
+                                    <rect x="-5" y="-5"          width="9" height="9" rx="1" fill="#4361ee" stroke="white" stroke-width="1" pointer-events="none"/>
+                                    <rect t-att-x="el.w - 4" y="-5"          width="9" height="9" rx="1" fill="#4361ee" stroke="white" stroke-width="1" pointer-events="none"/>
+                                    <rect x="-5" t-att-y="el.h - 4"          width="9" height="9" rx="1" fill="#4361ee" stroke="white" stroke-width="1" pointer-events="none"/>
+                                    <rect t-att-x="el.w - 4" t-att-y="el.h - 4" width="9" height="9" rx="1" fill="#4361ee" stroke="white" stroke-width="1" pointer-events="none"/>
+                                </t>
+
+                            </g>
+                        </t><!-- /elements -->
+
+                    </g><!-- /transform group -->
+                </svg>
+
+                <!-- ── Inline label editor overlay ─────────────────── -->
+                <t t-if="state.editingId">
+                    <div class="bpmn-label-overlay"
+                         t-att-style="labelEditorStyle">
+                        <input type="text"
+                               class="bpmn-label-input"
+                               t-ref="labelInput"
+                               t-att-value="state.editingLabel"
+                               t-on-input="onLabelInput"
+                               t-on-keydown="onLabelKeyDown"
+                               t-on-blur="onLabelBlur"
+                               placeholder="Label…"/>
+                    </div>
+                </t>
+
+            </div><!-- /canvas-wrap -->
+
+            <!-- ── Properties panel ───────────────────────────────── -->
+            <div t-if="selectedElement or selectedConnection" class="bpmn-props-panel">
+                <div class="bpmn-props-header">
+                    <i class="fa fa-sliders me-1"/>
+                    Properties
+                </div>
+
+                <!-- Type badge -->
+                <div class="bpmn-props-row">
+                    <label>Type</label>
+                    <span class="badge bpmn-type-badge"
+                          t-esc="(selectedElement and selectedElement.type) or 'Sequence Flow'"/>
+                </div>
+
+                <!-- Label input -->
+                <div class="bpmn-props-row">
+                    <label>Label</label>
+                    <input type="text" class="bpmn-props-input"
+                           t-att-value="(selectedElement and selectedElement.label) or (selectedConnection and selectedConnection.label) or ''"
+                           t-att-readonly="props.readonly or undefined"
+                           t-on-input="onPropLabelInput"
+                           placeholder="Label…"/>
+                </div>
+
+                <!-- Position (elements only) -->
+                <t t-if="selectedElement">
+                    <div class="bpmn-props-row">
+                        <label>Position</label>
+                        <span class="text-muted small">
+                            X: <t t-esc="Math.round(selectedElement.x)"/>,
+                            Y: <t t-esc="Math.round(selectedElement.y)"/>
+                        </span>
+                    </div>
+                    <div class="bpmn-props-row">
+                        <label>Size</label>
+                        <span class="text-muted small">
+                            <t t-esc="selectedElement.w"/> × <t t-esc="selectedElement.h"/>
+                        </span>
+                    </div>
+                </t>
+
+                <t t-if="!props.readonly">
+                    <button class="bpmn-delete-btn" t-on-click="deleteSelected">
+                        <i class="fa fa-trash-o me-1"/>Delete
+                    </button>
+                </t>
+            </div>
+
+        </div><!-- /work-area -->
+
+        <!-- ── Status bar ────────────────────────────────────────────── -->
+        <div class="bpmn-statusbar">
+            <span class="bpmn-status-tool">
+                <i class="fa fa-info-circle me-1"/>
+                <t t-esc="toolLabel"/>
+            </span>
+            <span class="bpmn-status-count">
+                <i class="fa fa-sitemap me-1"/>
+                <t t-esc="elementsList.length"/> elements · <t t-esc="connectionsList.length"/> connections
+            </span>
+            <span class="bpmn-status-zoom">
+                <i class="fa fa-search me-1"/>
+                <t t-esc="Math.round(state.zoom * 100)"/>%
+            </span>
+            <t t-if="state.connectFrom">
+                <span class="bpmn-status-hint">
+                    <i class="fa fa-hand-o-up me-1"/>
+                    Click a target element to complete the connection
+                </span>
+            </t>
+            <t t-if="state.tool !== 'pointer' and state.tool !== 'connect' and !state.tool.startsWith('add_')">
+            </t>
+            <t t-if="state.tool.startsWith('add_')">
+                <span class="bpmn-status-hint">
+                    <i class="fa fa-plus-circle me-1"/>
+                    Click on the canvas to place the element
+                </span>
+            </t>
+        </div>
+
+    </div><!-- /bpmn-editor-container -->
+</t>
+
+</templates>
