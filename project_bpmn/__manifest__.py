@@ -22,9 +22,10 @@ Features
 - Smart buttons on Project and Task forms showing diagram count
 - Chatter / mail tracking on diagrams
     """,
-    'author': 'abdzoro89',
+    'author': 'Abdulkrim Osman (+966562984106, +966553368212)',
     'website': 'https://apps.odoo.com',
     'support': 'abdzoro89@gmail.com',
+    'maintainer': 'a.osman@bab.com.sa',
     'depends': ['project', 'mail'],
     'data': [
         'security/ir.model.access.csv',
